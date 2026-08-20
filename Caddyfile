@@ -1,0 +1,20 @@
+:80 {
+    # Reverse proxy API endpoints to FastAPI backend
+    handle /api* {
+        reverse_proxy 127.0.0.1:8000
+    }
+
+    # Reverse proxy FastAPI documentation endpoints
+    handle /docs* {
+        reverse_proxy 127.0.0.1:8000
+    }
+
+    handle /openapi.json {
+        reverse_proxy 127.0.0.1:8000
+    }
+
+    # Reverse proxy all other routes to Next.js frontend
+    handle {
+        reverse_proxy 127.0.0.1:3000
+    }
+}
